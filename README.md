@@ -5,7 +5,7 @@
 The purpose of this tool is to provide a unified CLI for the Java ecosystem. This tool will initially provide the fallowing features:
 
 * Create maven/gradle projects from the command line
-  * ```jcli user-group-id project-artifact```
+  * ```jcli user-groupId project-artifact```
 * Install dependencies by the command line modifying the gradle or pom file.
   * ```jcli install artifactId```. When there are more artifacts with the same name the groupsId list will be shown for choice
 * Install dependencies by the command line downloading and building github or gitlab dependencies

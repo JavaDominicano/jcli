@@ -9,7 +9,7 @@ The purpose of this tool is to provide a unified CLI for the Java ecosystem. Thi
 * Install dependencies by the command line modifying the gradle or pom file.
   * ```jcli install user-artifactId```. When there are more artifacts with the same name the groupsId list will be shown for choice
 * Install dependencies by the command line downloading and building github or gitlab dependencies
-  * ```jcli install -g github-url``` Where com.github.**user** should match https://github.com/user and project with the name of the project on github
+  * ```jcli install -g github-url``` Where com.github.**user** should match https://github.com/user/project and project with the name of the project on github
   * ```jcli install -g github-user proyect```. .
 * Accept plugins
   * ```jcli install plugin-artifact```

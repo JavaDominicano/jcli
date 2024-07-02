@@ -1,4 +1,25 @@
-# JCLI
+# JCLI - A Command Line Tool For The Java Ecosystem
+
+
+The purpose of this tool is to provide a unified CLI for the Java ecosystem. This tool will initially provide the fallowing features:
+
+The purpose of this tool is to provide a unified CLI for the Java ecosystem. This tool will initially provide the fallowing features:
+
+* Create maven/gradle projects from the command line
+  * ```jcli create com.example my-app```
+* Accept maven and gradle arguments  
+* Install dependencies by the command line modifying the gradle or pom file.
+  * ```jcli install user-artifactId```. When there are more artifacts with the same name the groupsId list will be shown for choice
+* Install dependencies by the command line downloading and building github or gitlab dependencies (from master)
+  * ```jcli install -g github-url``` Where com.github.**user** should match https://github.com/user/project and project with the name of the project on github
+  * ```jcli install -g github-user proyect```. .
+  * ```jcli install -g github-user project tag```
+* Accept plugins
+  * ```jcli install-plugin plugin-artifact```
+  * ```jcli install-plugin -g https://github.com/user/project```
+* Create a embed a JVM using JLink or Pakr
+  * ```jcli embed ~/project-folder```
+
 
 ### Examples
 
@@ -57,10 +78,6 @@ test {
 
 ```shell
 ./jcli add-dependency org.apache.commons commons-lang3 3.12.0
-
 ```
 
-#### Execute a Java JAR or class
-
-Execute a Java JAR or a specific class within a JAR file.
 

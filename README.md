@@ -1,9 +1,7 @@
 # JCLI - A Command Line Tool For The Java Ecosystem
 
 
-The purpose of this tool is to provide a unified CLI for the Java ecosystem. This tool will initially provide the fallowing features:
-
-The purpose of this tool is to provide a unified CLI for the Java ecosystem. This tool will initially provide the fallowing features:
+The purpose of this tool is to provide an unified CLI for the Java ecosystem. This tool will initially provide the fallowing features:
 
 * Create maven/gradle projects from the command line
   * ```jcli create com.example my-app```

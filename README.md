@@ -76,8 +76,20 @@ test {
 
 #### Add a Dependency
 
+The usage of the add-dependency command is as bellow:
 ```shell
 ./jcli add-dependency org.apache.commons commons-lang3 3.12.0
+```
+
+The resulting pom file now contains the ```<project>``` tag has the ```<dependencies>``` tag with every new dependency added each time the command is executed
+```xml
+<dependencies>
+    <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-lang3</artifactId>
+        <version>3.12.0</version>
+    </dependency>
+</dependencies>
 ```
 
 

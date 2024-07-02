@@ -12,6 +12,7 @@ The purpose of this tool is to provide an unified CLI for the Java ecosystem. Th
   * ```jcli install -g github-url``` Where com.github.**user** should match https://github.com/user/project and project with the name of the project on github
   * ```jcli install -g github-user proyect```. .
   * ```jcli install -g github-user project tag```
+  * ```jcli install --github github-user project tag```
 * Accept plugins
   * ```jcli install-plugin plugin-artifact```
   * ```jcli install-plugin -g https://github.com/user/project```

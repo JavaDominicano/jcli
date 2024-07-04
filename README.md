@@ -1,4 +1,4 @@
-# JCLI - A Command Line Tool For The Java Ecosystem
+# JCLI - A Command Line Tool for he Java Ecosystem
 
 
 The purpose of this tool is to provide an unified CLI for the Java ecosystem. This tool will initially provide the fallowing features:

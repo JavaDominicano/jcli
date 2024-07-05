@@ -4,6 +4,7 @@ import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -18,7 +19,7 @@ public class CreateCommand implements Callable<Integer> {
     @Parameters(index = "1", description = "Artifact ID of the project")
     private String artifactId;
 
-    @Parameters(index = "2", description = "Version of the project")
+    @Parameters(index = "2", description = "Version of the project", defaultValue="1.0.0-SNAPSHOT")
     private String version;
 
     @Option(names = {"--build-tool", "-b"}, description = "Build tool to use (maven, gradle)", defaultValue = "maven")
@@ -26,6 +27,15 @@ public class CreateCommand implements Callable<Integer> {
 
     @Override
     public Integer call() throws Exception {
+
+        File projectDir = new File(artifactId);
+        if (!projectDir.exists() && !projectDir.mkdirs()) {
+            System.err.println("Failed to create project directory.");
+            return 1;
+        }
+
+        createProjectStructure(projectDir);
+
         if (buildTool.equalsIgnoreCase("maven")) {
             createMavenProject(groupId, artifactId, version);
         } else if (buildTool.equalsIgnoreCase("gradle")) {
@@ -39,16 +49,21 @@ public class CreateCommand implements Callable<Integer> {
 
     private void createMavenProject(String groupId, String artifactId, String version) throws IOException {
         String pomContent = generateMavenPom(groupId, artifactId, version);
-        Files.createDirectories(Paths.get(artifactId));
         Files.write(Paths.get(artifactId, "pom.xml"), pomContent.getBytes());
         System.out.println("Maven project created at " + artifactId);
     }
 
     private void createGradleProject(String groupId, String artifactId, String version) throws IOException {
         String buildGradleContent = generateGradleBuildFile(groupId, artifactId, version);
-        Files.createDirectories(Paths.get(artifactId));
         Files.write(Paths.get(artifactId, "build.gradle"), buildGradleContent.getBytes());
         System.out.println("Gradle project created at " + artifactId);
+    }
+
+    private void createProjectStructure(File projectDir) throws IOException {
+        Files.createDirectories(Paths.get(projectDir.getPath(), "src", "main", "java"));
+        Files.createDirectories(Paths.get(projectDir.getPath(), "src", "main", "resources"));
+        Files.createDirectories(Paths.get(projectDir.getPath(), "src", "test", "java"));
+        Files.createDirectories(Paths.get(projectDir.getPath(), "src", "test", "resources"));
     }
 
     private String generateMavenPom(String groupId, String artifactId, String version) {
@@ -60,6 +75,10 @@ public class CreateCommand implements Callable<Integer> {
                     <groupId>%s</groupId>
                     <artifactId>%s</artifactId>
                     <version>%s</version>
+                    <properties>
+                        <maven.compiler.source>21</maven.compiler.source>
+                        <maven.compiler.target>21</maven.compiler.target>
+                    </properties>
                 </project>
                 """;
         return pomTemplate.formatted(groupId, artifactId, version);

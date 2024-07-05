@@ -11,10 +11,10 @@ import java.util.concurrent.Callable;
 @Command(name = "generate", description = "Generates project scaffolding")
 public class GenerateCommand implements Callable<Integer> {
 
-    @Parameters(index = "0", description = "Type of scaffolding to generate (class, interface, controller)")
+    @Parameters(index = "0", description = "Type of scaffolding to generate (class, interface, record)")
     private String type;
 
-    @Parameters(index = "1", description = "Fully qualified name of the class/interface/controller")
+    @Parameters(index = "1", description = "Fully qualified name of the class/interface/record")
     private String qualifiedName;
 
     @Override
@@ -26,7 +26,7 @@ public class GenerateCommand implements Callable<Integer> {
             default -> throw new IllegalArgumentException("Unsupported type: " + type);
         };
 
-        String directoryPath = qualifiedName.substring(0, qualifiedName.lastIndexOf('.')).replace('.', '/');
+        String directoryPath = "src/main/java/" + qualifiedName.substring(0, qualifiedName.lastIndexOf('.')).replace('.', '/');
         String fileName = qualifiedName.substring(qualifiedName.lastIndexOf('.') + 1) + ".java";
 
         Files.createDirectories(Paths.get(directoryPath));
@@ -76,13 +76,13 @@ public class GenerateCommand implements Callable<Integer> {
 
     private String generateRecordTemplate(String qualifiedName) {
         String packageName = qualifiedName.substring(0, qualifiedName.lastIndexOf('.'));
-        String controllerName = qualifiedName.substring(qualifiedName.lastIndexOf('.') + 1);
+        String recordName = qualifiedName.substring(qualifiedName.lastIndexOf('.') + 1);
 
         return """
                 package %s;
 
                 public record %s() {}
-                """.formatted(packageName, controllerName);
+                """.formatted(packageName, recordName);
     }
 
 }
